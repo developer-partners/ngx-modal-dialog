@@ -1,0 +1,49 @@
+<div class="align-items-center dp-backdrop d-flex justify-content-center"
+     (mousedown)="mouseDownEvent($event, true)"
+     (mouseup)="mouseUpEvent($event)"
+     (keyup)="keyUpEvent($event)">
+  <div class="dp-modal"
+       [class.dp-large]="modalReference.config?.size === modalSize.large"
+       [class.dp-extra-large]="modalReference.config?.size === modalSize.extraLarge"
+       [class.dp-medium]="modalReference.config?.size === modalSize.medium"
+       [class.dp-full-screen-modal]="modalReference.config?.mode === 'fullScreen'"
+       [class.dp-disable-full-screen]="modalReference.config?.mode === 'disableFullScreen'"
+       [class.dp-modal-position-bottom]="modalReference.config?.position === 'bottom'">
+
+    <div class="dp-modal-header d-flex bg-primary text-default"
+         [class.bg-warning]="modalReference.config?.type === 'warning'"
+         [class.bg-error]="modalReference.config?.type === 'error'">
+      <h2 class="dp-title">
+        {{modalReference.config?.title}}
+      </h2>
+
+      <ng-container *ngIf="modalReference.config?.mode != 'disableFullScreen'">
+        <button *ngIf="modalReference.config?.mode != 'fullScreen'"
+                class="btn btn-primary border-0"
+                (click)="maximize()"
+                [attr.title]="'labels.maximize' | translate"
+                [attr.aria-label]="'labels.maximize' | translate">
+          <i class="fas fa-window-maximize"></i>
+        </button>
+
+        <button *ngIf="modalReference.config?.mode == 'fullScreen'"
+                (click)="restoreWindow()"
+                class="btn btn-primary border-0"
+                [attr.title]="'labels.restoreWindow' | translate"
+                [attr.aria-label]="'labels.restoreWindow' | translate">
+          <i class="fas fa-window-restore"></i>
+        </button>
+      </ng-container>
+      <button class="dp-close-modal btn btn-primary border-0"
+              (click)="close()"
+              [attr.title]="'labels.close' | translate"
+              [attr.aria-label]="'labels.close' | translate">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+
+    <div #bodyElement class="dp-modal-body" tabindex="-1">
+      <ng-template #contentContainer></ng-template>
+    </div>
+  </div>
+</div>

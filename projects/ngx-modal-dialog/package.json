@@ -1,0 +1,46 @@
+{
+  "name": "ngx-modal-dialog",
+  "version": "1.0.0",
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/developer-partners/ngx-modal-dialog"
+  },
+  "homepage": "https://developerpartners.com",
+  "keywords": [
+    "angular",
+    "ngx",
+    "ng",
+    "modal dialog",
+    "modal",
+    "dialog",
+    "modal window",
+    "angular modal",
+    "angular modal dialog",
+    "angular modal window",
+    "modal panel",
+    "angular modal panel",
+    "popup",
+    "angular popup",
+    "ngx-modal-dialog",
+    "ngx-modal",
+    "ngx-modal-window",
+    "ngx-modal-panel",
+    "ngx-popup",
+    "pop up",
+    "ng modal",
+    "ng modal dialog",
+    "ng modal window",
+    "ng panel",
+    "ngx modal dialog",
+    "ngx modal window",
+    "ngx modal panel"
+  ],
+  "peerDependencies": {
+    "@angular/common": "^14.2.0",
+    "@angular/core": "^14.2.0"
+  },
+  "dependencies": {
+    "tslib": "^2.3.0"
+  }
+}
