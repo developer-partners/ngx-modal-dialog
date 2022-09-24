@@ -4,7 +4,7 @@ export interface ModalConfig<T> {
   model?: T;
   type?: 'default' | 'error' | 'warning' | 'success',
   mode?: 'default' | 'disableFullScreen' | 'fullScreen';
-  position?: 'center' | 'bottom'
+  position?: 'center' | 'top' | 'bottom' | 'left' | 'right';
 }
 
 export enum ModalSize {

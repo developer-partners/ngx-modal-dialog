@@ -8,7 +8,10 @@
        [class.dp-medium]="modalReference.config?.size === modalSize.medium"
        [class.dp-full-screen-modal]="modalReference.config?.mode === 'fullScreen'"
        [class.dp-disable-full-screen]="modalReference.config?.mode === 'disableFullScreen'"
-       [class.dp-modal-position-bottom]="modalReference.config?.position === 'bottom'">
+       [class.dp-modal-position-top]="modalReference.config?.position === 'top'"
+       [class.dp-modal-position-bottom]="modalReference.config?.position === 'bottom'"
+       [class.dp-modal-position-left]="modalReference.config?.position === 'left'"
+       [class.dp-modal-position-right]="modalReference.config?.position === 'right'">
 
     <div class="dp-modal-header"
          [class.bg-warning]="modalReference.config?.type === 'warning'"
