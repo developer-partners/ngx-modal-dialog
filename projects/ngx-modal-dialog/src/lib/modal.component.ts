@@ -3,7 +3,7 @@ import { ModalReference } from './modal-reference';
 import { ModalSize } from './modal-config';
 
 @Component({
-  selector: 'app-modal',
+  selector: 'dp-modal',
   templateUrl: './modal.component.html',
   styleUrls: [
     './modal.component.scss'

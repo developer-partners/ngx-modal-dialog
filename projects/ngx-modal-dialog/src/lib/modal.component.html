@@ -1,4 +1,4 @@
-<div class="align-items-center dp-backdrop d-flex justify-content-center"
+<div class="dp-backdrop dp-modal-backdrop"
      (mousedown)="mouseDownEvent($event, true)"
      (mouseup)="mouseUpEvent($event)"
      (keyup)="keyUpEvent($event)">
@@ -10,7 +10,7 @@
        [class.dp-disable-full-screen]="modalReference.config?.mode === 'disableFullScreen'"
        [class.dp-modal-position-bottom]="modalReference.config?.position === 'bottom'">
 
-    <div class="dp-modal-header d-flex bg-primary text-default"
+    <div class="dp-modal-header"
          [class.bg-warning]="modalReference.config?.type === 'warning'"
          [class.bg-error]="modalReference.config?.type === 'error'">
       <h2 class="dp-title">
@@ -19,26 +19,30 @@
 
       <ng-container *ngIf="modalReference.config?.mode != 'disableFullScreen'">
         <button *ngIf="modalReference.config?.mode != 'fullScreen'"
-                class="btn btn-primary border-0"
                 (click)="maximize()"
-                [attr.title]="'labels.maximize' | translate"
-                [attr.aria-label]="'labels.maximize' | translate">
-          <i class="fas fa-window-maximize"></i>
+                title="Maximize"
+                aria-label="Maximize">
+          <span class="material-icons">
+            fullscreen
+          </span>
         </button>
 
         <button *ngIf="modalReference.config?.mode == 'fullScreen'"
                 (click)="restoreWindow()"
-                class="btn btn-primary border-0"
-                [attr.title]="'labels.restoreWindow' | translate"
-                [attr.aria-label]="'labels.restoreWindow' | translate">
-          <i class="fas fa-window-restore"></i>
+                title="Restore Window Size"
+                aria-label="Restore Window Size">
+          <span class="material-icons">
+            fullscreen_exit
+          </span>
         </button>
       </ng-container>
-      <button class="dp-close-modal btn btn-primary border-0"
+      <button class="dp-close-modal"
               (click)="close()"
-              [attr.title]="'labels.close' | translate"
-              [attr.aria-label]="'labels.close' | translate">
-        <i class="fas fa-times"></i>
+              title="Close"
+              aria-label="Close">
+        <span class="material-icons">
+          close
+        </span>
       </button>
     </div>
 

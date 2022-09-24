@@ -1,3 +1,21 @@
+.dp-modal-backdrop {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.dp-backdrop {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 49;
+  background-color: rgba(49, 58, 66, 0.35);
+}
+
 .dp-modal {
   min-width: 280px;
   max-width: 800px;
@@ -33,6 +51,7 @@
 }
 
 .dp-modal-header {
+  display: flex;
   background-color: #003d84;
   border-radius: 5px 5px 0 0;
   color: #e2dfdf;
@@ -40,6 +59,13 @@
   padding-left: 14px;
   padding-top: 1px;
   height: 50px;
+
+  button {
+    border: 0;
+    background-color: transparent;
+    color: #e2dfdf;
+    padding: 8px;
+  }
 }
 
 .dp-modal-header .dp-title {
@@ -116,7 +142,7 @@
     top: 0
   }
 
-  &,
+  .dp-modal,
   .dp-modal-header {
     border-radius: 0;
   }

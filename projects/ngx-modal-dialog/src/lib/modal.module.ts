@@ -1,18 +1,18 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { NgxModalDialogComponent } from './modal.component';
-
-
+import { BrowserModule } from '@angular/platform-browser';
+import { ModalComponent } from './modal.component';
 
 @NgModule({
   declarations: [
-    NgxModalDialogComponent
+    ModalComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    BrowserModule
   ],
   exports: [
-    NgxModalDialogComponent
+    ModalComponent
   ]
 })
-export class NgxModalDialogModule { }
+export class ModalModule { }

@@ -7,20 +7,27 @@ import { ModalComponent } from "./modal.component";
   providedIn: 'root'
 })
 export class ModalService {
+  private _componentFactoryResolver: ComponentFactoryResolver;
+  private _applicaionRef: ApplicationRef;
+  private _injector: Injector;
+
   constructor(
-    private readonly _applicaionRef: ApplicationRef,
-    private readonly _viewContainer: ViewContainerRef,
-    private readonly _injector: Injector
+    componentFactoryResolver: ComponentFactoryResolver,
+    applicaionRef: ApplicationRef,
+    injector: Injector
   ) {
+    this._componentFactoryResolver = componentFactoryResolver;
+    this._applicaionRef = applicaionRef;
+    this._injector = injector;
   }
 
   private createModalComponent(dependecies: WeakMap<any, any>): ComponentRef<ModalComponent> {
-    return this._viewContainer.createComponent(ModalComponent, {
-      injector: new ModalInjector(
-        this._injector,
-        dependecies
-      )
-    });
+    let factory = this._componentFactoryResolver.resolveComponentFactory(ModalComponent);
+
+    return factory.create(new ModalInjector(
+      this._injector,
+      dependecies
+    ));
   }
 
   private createModalRefernce<TConfig, TResult>(map: WeakMap<any, any>, config: ModalConfig<TConfig>): InternalModalRef<TConfig, TResult> {
@@ -52,7 +59,7 @@ export class ModalService {
     // To trigger the animation effect. The modal is added to document at this point, but it's invisible.
     // We animate the showing part.
     window.setTimeout(() => {
-      modalReference.getHtmlElement().firstElementChild.classList.add('app-visible');
+      modalReference.getHtmlElement().firstElementChild.classList.add('dp-visible');
     });
 
     modalReference.componentRef.changeDetectorRef.detectChanges();
@@ -61,7 +68,7 @@ export class ModalService {
   }
 
   private removeModal<TConfig, TResult>(modalReference: InternalModalRef<TConfig, TResult>): void {
-    modalReference.getHtmlElement().firstElementChild.classList.remove('app-visible');
+    modalReference.getHtmlElement().firstElementChild.classList.remove('dp-visible');
 
     // Wait until the closing animation is done, then remove the component.
     window.setTimeout(() => {
@@ -72,16 +79,21 @@ export class ModalService {
 }
 
 class ModalInjector implements Injector {
+  private _injector: Injector;
+  private _extraDependecnies: WeakMap<any, any>;
+
   constructor(
-    private readonly _injector: Injector,
-    private readonly _extraDependencies: WeakMap<any, any>
+    injector: Injector,
+    extraDependencies: WeakMap<any, any>
   ) {
+    this._injector = injector;
+    this._extraDependecnies = extraDependencies;
   }
 
   public get<T>(token: Type<T> | InjectionToken<T> | AbstractType<T>, notFoundValue?: T, flags?: InjectFlags): T;
   public get(token: any, notFoundValue?: any);
   public get(token: any, notFoundValue?: any, flags?: any) {
-    let resolved = this._extraDependencies.get(token);
+    let resolved = this._extraDependecnies.get(token);
 
     if (resolved) {
       return resolved;
