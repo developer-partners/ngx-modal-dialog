@@ -6,8 +6,6 @@ export class ModalReference<TConfig, TResult = TConfig> {
   private _event: Subject<TResult>;
 
   public config: ModalConfig<TConfig>;
-  public isLoaderVisible: boolean;
-  public loaderInfo: string;
 
   constructor(config: ModalConfig<TConfig>) {
     this.config = config;

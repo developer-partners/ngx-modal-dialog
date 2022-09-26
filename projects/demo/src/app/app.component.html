@@ -1,21 +1,35 @@
 <div>
-  <button type="button" (click)="showModal()">
+  <button class="btn btn-outline-secondary m-1" type="button" (click)="showModal()">
     Show Modal
   </button>
 
-  <button type="button" (click)="showBottom()">
+  <button class="btn btn-outline-secondary m-1" type="button" (click)="showBottom()">
     Show Docked Bottom
   </button>
 
-  <button type="button" (click)="showLeft()">
+  <button class="btn btn-outline-secondary m-1" type="button" (click)="showLeft()">
     Show Docked Left
   </button>
 
-  <button type="button" (click)="showTop()">
+  <button class="btn btn-outline-secondary m-1" type="button" (click)="showTop()">
     Show Docked Top
   </button>
 
-  <button type="button" (click)="showRight()">
-    Show Docked Rigth
+  <button class="btn btn-outline-secondary m-1" type="button" (click)="showRight()">
+    Show Docked Right
+  </button>
+</div>
+
+<div>
+  <button class="btn btn-outline-secondary m-1" type="button" (click)="showWithResult()">
+    Show Form
+  </button>
+
+  <p class="ms-3">Your name is: <span class="font-weight-bold">{{person?.firstName}} {{person?.lastName}}</span></p>
+</div>
+
+<div>
+  <button class="btn btn-outline-secondary m-1" type="button" (click)="showLongContent()">
+    Show Modal with Long Text
   </button>
 </div>
