@@ -20,6 +20,7 @@
   display: flex;
   flex-direction: column;
   min-width: 280px;
+  min-height: 100px;
   max-width: 800px;
   transition: all 0.4s cubic-bezier(0.65, 0.07, 0.35, 0.92);
   opacity: 0;
@@ -32,37 +33,46 @@
   position: absolute;
 
   &.dp-modal-position-top {
-    transition: all 0.4s ease-in-out;
-    transform: scale(1);
     top: -100%;
-    width: 100% !important;
-    min-width: 100% !important;
   }
 
   &.dp-modal-position-bottom {
-    transition: all 0.4s ease-in-out;
-    transform: scale(1);
     bottom: -100%;
-    width: 100% !important;
-    min-width: 100% !important;
   }
 
   &.dp-modal-position-left {
-    transition: all 0.4s ease-in-out;
-    transform: scale(1);
     left: -100%;
-    height: 100% !important;
-    min-height: 100% !important;
-    width: 0;
   }
 
   &.dp-modal-position-right {
+    right: -100%;
+  }
+
+  &.dp-modal-position-top,
+  &.dp-modal-position-bottom {
+    width: 100%;
+    min-width: 100%;
+    height: 50%;
+  }
+
+  &.dp-modal-position-left,
+  &.dp-modal-position-right {
+    height: 100%;
+    min-height: 100%;
+    width: 0;
+  }
+
+  &.dp-modal-position-top,
+  &.dp-modal-position-bottom,
+  &.dp-modal-position-left,
+  &.dp-modal-position-right {
     transition: all 0.4s ease-in-out;
     transform: scale(1);
-    right: -100%;
-    height: 100% !important;
-    min-height: 100% !important;
-    width: 0;
+    border-radius: 0;
+
+    .dp-modal-header {
+      border-radius: 0;
+    }
   }
 }
 
@@ -72,19 +82,19 @@
   filter: alpha(opacity=100);
 
   &.dp-modal-position-top {
-    top: 0 !important;
+    top: 0;
   }
 
   &.dp-modal-position-bottom {
-    bottom: 0 !important;
+    bottom: 0;
   }
 
   &.dp-modal-position-left {
-    left: 0 !important;
+    left: 0;
   }
 
   &.dp-modal-position-right {
-    right: 0 !important;
+    right: 0;
   }
 }
 
@@ -152,14 +162,10 @@
 .dp-modal.dp-extra-large.dp-full-screen-modal {
   width: 100%;
   min-width: 100%;
-  height: 100% !important;
+  height: 100%;
   min-height: 100%;
   max-height: 100%;
   max-width: none;
-  bottom: 0 !important;
-  left: 0 !important;
-  top: 0 !important;
-  right: 0 !important;
 
   &,
   .dp-modal-header {
@@ -178,10 +184,6 @@
     min-height: 95%;
     max-height: 100%;
     max-width: none;
-    bottom: 0 !important;
-    left: 0 !important;
-    right: 0 !important;
-    top: 0 !important;
   }
 
   .dp-modal,
