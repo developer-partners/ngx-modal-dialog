@@ -14,8 +14,9 @@
        [class.dp-modal-position-right]="modalReference.config?.position === 'right'">
 
     <div class="dp-modal-header"
-         [class.bg-warning]="modalReference.config?.type === 'warning'"
-         [class.bg-error]="modalReference.config?.type === 'error'">
+         [class.dp-warning]="modalReference.config?.type === 'warning'"
+         [class.dp-error]="modalReference.config?.type === 'error'"
+         [class.dp-success]="modalReference.config?.type === 'success'">
       <h2 class="dp-title">
         {{modalReference.config?.title}}
       </h2>

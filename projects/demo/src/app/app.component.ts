@@ -11,6 +11,7 @@ export class AppComponent {
   public person: Person;
   public modalPosition: 'center' | 'top' | 'bottom' | 'left' | 'right';
   public fruitName: string;
+  public modalType: 'default' | 'error' | 'warning' | 'success';
 
   constructor(private readonly _modalService: ModalService) {
   }
@@ -72,6 +73,13 @@ export class AppComponent {
         model: this.fruitName
       });
     }
+  }
+
+  public showWithType(): void {
+    this._modalService.show(ModalDemoComponent, {
+      title: 'Modal with Type',
+      type: this.modalType
+    });
   }
 }
 

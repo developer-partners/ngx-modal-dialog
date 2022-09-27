@@ -77,3 +77,28 @@
     Show Modal
   </button>
 </div>
+
+<div class="m-1">
+  <p>
+    Please select the modal type. Changing modal type changes the header background color.
+  </p>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="mb-3">
+        <label for="fruit" class="form-label">
+          Type
+        </label>
+        <select id="fruit" class="form-control" [(ngModel)]="modalType">
+          <option value=""></option>
+          <option value="error">Error</option>
+          <option value="warning">Warning</option>
+          <option value="success">Success</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <button class="btn btn-outline-secondary" type="button" (click)="showWithType()">
+    Show Modal
+  </button>
+</div>
