@@ -25,11 +25,55 @@
     Show Form
   </button>
 
-  <p class="ms-3">Your name is: <span class="font-weight-bold">{{person?.firstName}} {{person?.lastName}}</span></p>
+  <p class="ms-3">Your name is: <span class="fw-bold">{{person?.firstName}} {{person?.lastName}}</span></p>
 </div>
 
-<div>
-  <button class="btn btn-outline-secondary m-1" type="button" (click)="showLongContent()">
+<div class="m-1">
+  <div class="row">
+    <div class="col-md-6">
+      <div class="mb-3">
+        <label for="modal-position-1" class="form-label">
+          Dock Position
+        </label>
+        <select id="modal-position-1" class="form-control" [(ngModel)]="modalPosition">
+          <option value=""></option>
+          <option value="center">Center</option>
+          <option value="top">Top</option>
+          <option value="bottom">Bottom</option>
+          <option value="left">Left</option>
+          <option value="right">Rigth</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <button class="btn btn-outline-secondary" type="button" (click)="showLongContent()">
     Show Modal with Long Text
+  </button>
+</div>
+
+<div class="m-1">
+  <p>
+    Select your favorite fruit
+  </p>
+
+  <div class="row">
+    <div class="col-md-6">
+      <div class="mb-3">
+        <label for="fruit" class="form-label">
+          Fruit
+        </label>
+        <select id="fruit" class="form-control" [(ngModel)]="fruitName">
+          <option value=""></option>
+          <option value="Apple">Apple</option>
+          <option value="Orange">Orange</option>
+          <option value="Banana">Banana</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <button class="btn btn-outline-secondary" type="button" (click)="showWithParam()">
+    Show Modal
   </button>
 </div>

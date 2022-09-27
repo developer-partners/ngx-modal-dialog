@@ -9,6 +9,8 @@ import { ModalReference, ModalService } from 'projects/ngx-modal-dialog/src/publ
 })
 export class AppComponent {
   public person: Person;
+  public modalPosition: 'center' | 'top' | 'bottom' | 'left' | 'right';
+  public fruitName: string;
 
   constructor(private readonly _modalService: ModalService) {
   }
@@ -58,8 +60,18 @@ export class AppComponent {
 
   public showLongContent(): void {
     this._modalService.show(ModalLongContentComponent, {
-      title: 'Modal with Long Text'
+      title: 'Modal with Long Text',
+      position: this.modalPosition
     });
+  }
+
+  public showWithParam(): void {
+    if (this.fruitName) {
+      this._modalService.show(ModalWithParameterComponent, {
+        title: 'Modal with Params',
+        model: this.fruitName
+      });
+    }
   }
 }
 
@@ -143,7 +155,7 @@ export class ModalLongContentComponent {
 }
 
 @Component({
-  template: `<p>Your favorite fruit is: <span class="font-weight-bold">{{fruitName}}</span></p>`
+  template: `<p>Your favorite fruit is <span class="fw-bold">{{fruitName}}</span></p>`
 })
 export class ModalWithParameterComponent {
   public fruitName: string;
