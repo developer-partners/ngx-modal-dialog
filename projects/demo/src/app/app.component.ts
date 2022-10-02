@@ -51,7 +51,7 @@ export class AppComponent {
   }
 
   public showWithResult(): void {
-    this._modalService.show<Person, Person>(ModalResultDemoComponent, {
+    this._modalService.show<Person>(ModalResultDemoComponent, {
       title: 'Please enter your name'
     }).result()
       .subscribe(person => {

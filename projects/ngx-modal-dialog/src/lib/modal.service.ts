@@ -47,7 +47,7 @@ export class ModalService {
     return modalReference;
   }
 
-  public show<TConfig, TResult>(componentType: Type<any>, config: ModalConfig<TConfig>): ModalReference<TConfig, TResult> {
+  public show<TConfig, TResult = TConfig>(componentType: Type<any>, config: ModalConfig<TConfig>): ModalReference<TConfig, TResult> {
     let map = new WeakMap<any, any>();
     let modalReference = this.createModalRefernce<TConfig, TResult>(map, config);
 
