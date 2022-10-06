@@ -1,27 +1,126 @@
-# NgxModalDialog
+# @developer-partners/ngx-modal-dialog
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.2.2.
+## Basic Usage
 
-## Development server
+1. Install the libary
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+```
+npm install @developer-partners/ngx-modal-dialog
+```
 
-## Code scaffolding
+2. Import it in your module:
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+```
+import { ModalModule } from '@developer-partners/ngx-modal-dialog';
 
-## Build
+@NgModule({
+  imports: [
+    ModalModule
+  ],
+  providers: [],
+  bootstrap: [AppComponent]
+})
+export class AppModule { }
+```
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+3. Inject the ModalService Angular service into your component constructor:
 
-## Running unit tests
+```
+constructor(private readonly _modalService: ModalService) {
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+}
+```
 
-## Running end-to-end tests
+4. Use the injected ModalService instance for showing a modal dialog:
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+```
+public createBook(): void {
+    this._modalService.show<Book>(CreateEditBookComponent, {
+        title: 'Create Book'
+    }).result()
+        .subscribe(newBook => {
+            // newBook is returned when the CreateEditBookComponent calls the ModalReference.closeSuccess function 
+            // and passes data to it
+            this.books?.push(newBook);
+        });
+}
+```
 
-## Further help
+The `ModalService.show` function accepts 2 parameters. The first parameter is the Angular component to show inside the modal dialog. In the example above, it is `CreateEditBookComponent`. Without a component passed to it, a modal dialog would be just an empty panel overlaying the main screen. The second parameter is an object with options that contain setttings such as title, position, and size of the modal dialog.
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+&nbsp;
+&nbsp;
+&nbsp;
+## Interacting with Modal Dialog
+&nbsp;
+
+The component shown inside the modal dialog body can interact with the modal dialog. It can close the dialog, change its size, position, and a few other properties. To be able to interact with the modal dialog, you have to inject the ModalReference service in your component.
+
+```
+import { ModalReference } from "@developer-partners/ngx-modal-dialog";
+
+constructor(private readonly _modalReference: ModalReference<Book>) {
+    
+}
+```
+
+To close the modal dialog using the `ModalReference` service, simply call the `cancel` function.
+
+```
+public cancel(): void {
+    this._modalReference.cancel();
+}
+```
+
+To close the modal dialog and indicate a successful result, call the `closeSuccess` function. The `closeSuccess` function can optionally receive a parameter that will be passed back to the component that showed the modal dialog.
+
+```
+public saveData(): void {
+    this._modalReference.closeSuccess(this.book);
+}
+```
+
+&nbsp;
+&nbsp;
+&nbsp;
+## Passing Data to Modal Dialog
+&nbsp;
+
+When you are showing the modal dialog, you can pass custom data to it. You can use the `model` property of modal options for that.
+
+```
+ public editBook(bookToEdit: Book): void {
+    this._modalService.show<Book>(CreateEditBookComponent, {
+        title: 'Edit Book',
+        model: bookToEdit
+    }).result()
+        .subscribe(editedBook => {
+            // editedBook is returned when the CreateEditBookComponent calls the ModalReference.closeSuccess function 
+            // and passes data to it
+            console.log(editedBook);
+        });
+}
+```
+
+The component shown in the body of the modal dialog (`CreateEditBookComponent` in this example) can use the passed data using `ModalReference.config.model` property
+
+```
+import { ModalReference } from "@developer-partners/ngx-modal-dialog";
+
+constructor(private readonly _modalReference: ModalReference<Book>) {
+    console.log(this._modalReference.config.model);
+}
+```
+&nbsp;
+&nbsp;
+&nbsp;
+## Credits
+Developer Partners, Inc.
+
+[https://developerpartners.com](https://developerpartners.com)
+
+&nbsp;
+&nbsp;
+&nbsp;
+## License
+[Apache License 2.0](https://github.com/developer-partners/ngx-modal-dialog/blob/main/LICENSE)
