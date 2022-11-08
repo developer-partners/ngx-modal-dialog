@@ -8,8 +8,7 @@ import { ModalComponent } from './modal.component';
     ModalComponent
   ],
   imports: [
-    CommonModule,
-    BrowserModule
+    CommonModule
   ],
   exports: [
     ModalComponent
