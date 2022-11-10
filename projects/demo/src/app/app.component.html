@@ -102,3 +102,13 @@
     Show Modal
   </button>
 </div>
+
+<div class="m-1">
+  <p>Demo with cancel event</p>
+
+  <button class="btn btn-outline-secondary" type="button" (click)="showWithCancel()">
+    Show Modal
+  </button>
+
+  <p *ngIf="wasCanceled">The modal dialog was canceled</p>
+</div>

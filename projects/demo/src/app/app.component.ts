@@ -12,6 +12,7 @@ export class AppComponent {
   public modalPosition: 'center' | 'top' | 'bottom' | 'left' | 'right';
   public fruitName: string;
   public modalType: 'default' | 'error' | 'warning' | 'success';
+  public wasCanceled: boolean;
 
   constructor(private readonly _modalService: ModalService) {
   }
@@ -80,6 +81,15 @@ export class AppComponent {
       title: 'Modal with Type',
       type: this.modalType
     });
+  }
+
+  public showWithCancel(): void {
+    this._modalService.show(ModalDemoComponent, {
+      title: 'Modal with Cancel Detection'
+    }).cancelResult()
+      .subscribe(() => {
+        this.wasCanceled = true;
+      });
   }
 }
 
