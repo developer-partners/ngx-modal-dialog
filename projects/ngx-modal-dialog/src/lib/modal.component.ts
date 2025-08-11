@@ -1,4 +1,4 @@
-import { Component, ComponentRef, ViewChild, ViewContainerRef, AfterViewInit, Type, ChangeDetectorRef, ElementRef, OnDestroy, ViewEncapsulation } from "@angular/core";
+import { Component, ComponentRef, ViewChild, ViewContainerRef, AfterViewInit, Type, ChangeDetectorRef, ElementRef, OnDestroy, ViewEncapsulation, EnvironmentInjector, Injector, Input } from "@angular/core";
 import { ModalReference } from './modal-reference';
 import { ModalSize } from './modal-config';
 
@@ -21,6 +21,9 @@ export class ModalComponent implements AfterViewInit, OnDestroy {
   public modalSize = ModalSize;
   public classConfig: any;
 
+  public envInjector?: EnvironmentInjector;
+  public elementInjector?: Injector;
+
   @ViewChild('contentContainer', { read: ViewContainerRef })
   public contentContainer: ViewContainerRef;
 
@@ -37,7 +40,11 @@ export class ModalComponent implements AfterViewInit, OnDestroy {
 
   private createModalContent(componentType: Type<any>): ComponentRef<any> {
     this.contentContainer.clear();
-    return this.contentContainer.createComponent(componentType);
+
+    return this.contentContainer.createComponent(componentType, {
+      injector: this.elementInjector ?? this.contentContainer.injector,
+      environmentInjector: this.envInjector ?? this.contentContainer.injector.get(EnvironmentInjector)
+    });
   }
 
   public ngAfterViewInit(): void {

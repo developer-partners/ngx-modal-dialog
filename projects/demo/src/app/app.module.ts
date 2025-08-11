@@ -4,7 +4,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { ModalModule } from 'projects/ngx-modal-dialog/src/public-api';
 
 import { AppRoutingModule } from './app-routing.module';
-import { AppComponent, ModalDemoComponent, ModalLongContentComponent, ModalResultDemoComponent, ModalWithParameterComponent } from './app.component';
+import { HomeComponent, ModalDemoComponent, ModalLongContentComponent, ModalResultDemoComponent, ModalWithParameterComponent } from './home/home.component';
+import { AppComponent } from './app.component';
 
 @NgModule({
   declarations: [
@@ -12,7 +13,8 @@ import { AppComponent, ModalDemoComponent, ModalLongContentComponent, ModalResul
     ModalDemoComponent,
     ModalResultDemoComponent,
     ModalLongContentComponent,
-    ModalWithParameterComponent
+    ModalWithParameterComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,

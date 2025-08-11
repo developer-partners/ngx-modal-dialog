@@ -1,4 +1,4 @@
-import { Injectable, ComponentFactoryResolver, ApplicationRef, Injector, Type, ComponentRef, InjectionToken, AbstractType, InjectFlags, EmbeddedViewRef, ViewContainerRef } from "@angular/core";
+import { Injectable, ComponentFactoryResolver, ApplicationRef, Injector, Type, ComponentRef, InjectionToken, AbstractType, InjectFlags, EmbeddedViewRef, ViewContainerRef, createComponent, EnvironmentInjector } from "@angular/core";
 import { ModalConfig } from "./modal-config";
 import { ModalReference } from "./modal-reference";
 import { ModalComponent } from "./modal.component";
@@ -7,27 +7,39 @@ import { ModalComponent } from "./modal.component";
   providedIn: 'root'
 })
 export class ModalService {
-  private _componentFactoryResolver: ComponentFactoryResolver;
   private _applicaionRef: ApplicationRef;
   private _injector: Injector;
+  private _envInjector: EnvironmentInjector;
 
   constructor(
-    componentFactoryResolver: ComponentFactoryResolver,
     applicaionRef: ApplicationRef,
-    injector: Injector
+    injector: Injector,
+    envInjector: EnvironmentInjector
   ) {
-    this._componentFactoryResolver = componentFactoryResolver;
     this._applicaionRef = applicaionRef;
     this._injector = injector;
+    this._envInjector = envInjector;
   }
 
-  private createModalComponent(dependecies: WeakMap<any, any>): ComponentRef<ModalComponent> {
-    let factory = this._componentFactoryResolver.resolveComponentFactory(ModalComponent);
+  private createModalComponent(dependecies: WeakMap<any, any>, config: ModalConfig<any>): ComponentRef<ModalComponent> {
+    const envInjector =
+      config.viewContainerRef?.injector.get(EnvironmentInjector, null) ??
+      this._envInjector;
 
-    return factory.create(new ModalInjector(
-      this._injector,
+    const injector = new ModalInjector(
+      config.viewContainerRef?.injector ?? this._injector,
       dependecies
-    ));
+    );
+
+    const component = createComponent(ModalComponent, {
+      environmentInjector: envInjector,
+      elementInjector: injector
+    });
+
+    component.instance.envInjector = envInjector;
+    component.instance.elementInjector = injector;
+
+    return component;
   }
 
   private createModalRefernce<TConfig, TResult>(map: WeakMap<any, any>, config: ModalConfig<TConfig>): InternalModalRef<TConfig, TResult> {
@@ -36,7 +48,7 @@ export class ModalService {
     // Create with internal implementation, but inject the public version.
     map.set(ModalReference, modalReference);
 
-    modalReference.componentRef = this.createModalComponent(map);
+    modalReference.componentRef = this.createModalComponent(map, config);
 
     modalReference
       .result()
